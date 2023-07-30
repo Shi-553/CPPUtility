@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <Extern href="stdidcmd.h"/>
+  <Extern href="vsshlids.h"/>
+  <Include href="KnownImageIds.vsct"/>
+  <Include href="VSGlobals.vsct"/>
+
+  <Commands package="CPPUtility">
+    <Groups>
+      <Group guid="CPPUtility" id="CPPUtilityMenuGroup" priority="0x0600">
+		  <Parent guid="VSMainMenu" id="Extensions"/>
+      </Group>
+		<Group guid="CPPUtility" id="CPPUtilityMenuSubGroup" priority="0x0600">
+			<Parent guid="CPPUtility" id="CPPUtilityMenu"/>
+		</Group>
+    </Groups>
+
+    <!--This section defines the elements the user can interact with, like a menu command or a button
+        or combo box in a toolbar. -->
+
+	  <Menus>
+		  <Menu guid="CPPUtility" id="CPPUtilityMenu"
+			priority="0x0700" type="Menu">
+			  <Parent guid="CPPUtility" id="CPPUtilityMenuGroup" />
+			  <Strings>
+				  <ButtonText>CPPUtility</ButtonText>
+			  </Strings>
+		  </Menu>
+	  </Menus>
+		  
+    <Buttons>
+      <Button guid="CPPUtility" id="AutomaticallyAddConstCommand" priority="0x0100" type="Button">
+        <Parent guid="CPPUtility" id="CPPUtilityMenuSubGroup" />
+	    <Icon guid="ImageCatalogGuid" id="Constant" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>Automatically Add Const</ButtonText>
+          <LocCanonicalName>.CPPUtility.AutomaticallyAddConstCommand</LocCanonicalName>
+        </Strings>
+      </Button>
+		
+      <!--<Button guid="CPPUtility" id="AutomaticallyAddConstIncludeTemplateCommand" priority="0x0101" type="Button">
+        <Parent guid="CPPUtility" id="CPPUtilityMenuSubGroup" />
+	    <Icon guid="ImageCatalogGuid" id="Constant" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>Automatically Add Const Include Template</ButtonText>
+          <LocCanonicalName>.CPPUtility.AutomaticallyAddConstIncludeTemplateCommand</LocCanonicalName>
+        </Strings>
+      </Button>-->
+		
+      <!--<Button guid="CPPUtility" id="GenerateConstructorCommand" priority="0x0102" type="Button">
+        <Parent guid="CPPUtility" id="CPPUtilityMenuSubGroup" />
+		<Icon guid="ImageCatalogGuid" id="GenerateMethod" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>Generate Constructor Command</ButtonText>
+          <LocCanonicalName>.CPPUtility.GenerateConstructorCommand</LocCanonicalName>
+        </Strings>
+      </Button>-->
+
+
+		<Button guid="CPPUtility" id="CreateHeaderComment" priority="0x0101" type="Button">
+			<Parent guid="CPPUtility" id="CPPUtilityMenuSubGroup" />
+			<Icon guid="ImageCatalogGuid" id="GenerateFile" />
+			<CommandFlag>IconIsMoniker</CommandFlag>
+			<Strings>
+				<ButtonText>Create Header Comment</ButtonText>
+				<LocCanonicalName>.CPPUtility.CreateHeaderComment</LocCanonicalName>
+			</Strings>
+		</Button>
+
+		<Button guid="CPPUtility" id="GenerateCPPComment" priority="0x0102" type="Button">
+			<Parent guid="CPPUtility" id="CPPUtilityMenuSubGroup" />
+			<Icon guid="ImageCatalogGuid" id="GenerateFile" />
+			<CommandFlag>IconIsMoniker</CommandFlag>
+			<Strings>
+				<ButtonText>Generate CPP Comment</ButtonText>
+				<LocCanonicalName>.CPPUtility.GenerateCPPComment</LocCanonicalName>
+			</Strings>
+		</Button>
+		
+		
+      <Button guid="CPPUtility" id="EscapeCommand" priority="0x0400" type="Button">
+        <Parent guid="CPPUtility" id="CPPUtilityMenuSubGroup" />
+	    <Icon guid="ImageCatalogGuid" id="StopQuery" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>Stop Command</ButtonText>
+          <LocCanonicalName>.CPPUtility.EscapeCommand</LocCanonicalName>
+        </Strings>
+      </Button>
+		
+      <Button guid="CPPUtility" id="OpenOptionPageCommand" priority="0x0500" type="Button">
+        <Parent guid="CPPUtility" id="CPPUtilityMenuSubGroup" />
+	    <Icon guid="ImageCatalogGuid" id="Settings" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>Options</ButtonText>
+          <LocCanonicalName>.CPPUtility.OpenOptionPageCommand</LocCanonicalName>
+        </Strings>
+      </Button>
+		
+		
+	
+    </Buttons>
+  </Commands>
+
+  <Symbols>
+    <GuidSymbol name="CPPUtility" value="{accbcd45-dcab-4d08-8da9-d1897dad0b56}">
+      <IDSymbol name="CPPUtilityMenuGroup" value="0x0001" />
+      <IDSymbol name="CPPUtilityMenuSubGroup" value="0x0002" />
+      <IDSymbol name="CPPUtilityMenu" value="0x0010" />
+      <IDSymbol name="AutomaticallyAddConstCommand" value="0x0100" />
+      <IDSymbol name="AutomaticallyAddConstIncludeTemplateCommand" value="0x0101" />
+      <IDSymbol name="GenerateConstructorCommand" value="0x0102" />
+      <IDSymbol name="EscapeCommand" value="0x0103" />
+      <IDSymbol name="GenerateCPPComment" value="0x0104" />
+      <IDSymbol name="OpenOptionPageCommand" value="0x0105" />
+      <IDSymbol name="CreateHeaderComment" value="0x0106" />
+    </GuidSymbol>
+	  <GuidSymbol name="CPPUtilityOptionPage" value="{7cef184d-42d9-4ea3-8b30-334ab3d3cc76}">
+	  </GuidSymbol>
+  </Symbols>
+</CommandTable>
