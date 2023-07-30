@@ -98,6 +98,7 @@
     <Page Include="Options\CustomControll\Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Content Include=".gitignore" />
     <Content Include="Resources\Icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
