@@ -44,45 +44,45 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AutomaticallyAddConst\AutomaticallyAddConst.cs" />
-    <Compile Include="CommandFilter\CommandFilter.cs" />
-    <Compile Include="Commands\CreateHeaderComment.cs" />
-    <Compile Include="Options\MultipleLineEditDialog.xaml.cs">
+    <Compile Include="Source\AutomaticallyAddConst\AutomaticallyAddConst.cs" />
+    <Compile Include="Source\CommandFilter\CommandFilter.cs" />
+    <Compile Include="Source\Commands\CreateHeaderComment.cs" />
+    <Compile Include="Source\Options\MultipleLineEditDialog.xaml.cs">
       <DependentUpon>MultipleLineEditDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utility\TaskUtility.cs" />
-    <Compile Include="Literal\BasicLiteralFormatter.cs" />
-    <Compile Include="Literal\CPPFunctionCommentLiteralFormatter.cs" />
-    <Compile Include="Literal\DocumentLiteralFormatter.cs" />
-    <Compile Include="Literal\ILiteralFormatter.cs" />
-    <Compile Include="Options\CustomControll\CustomDataGrid.cs" />
-    <Compile Include="Singleton\EditPointManager.cs" />
-    <Compile Include="Commands\GenerateCPPComment.cs" />
-    <Compile Include="Commands\OpenOptionPageCommand.cs" />
-    <Compile Include="Options\CPPUtilityOption.cs" />
-    <Compile Include="Options\CPPUtilityOptionPage.cs">
+    <Compile Include="Source\Utility\TaskUtility.cs" />
+    <Compile Include="Source\Literal\BasicLiteralFormatter.cs" />
+    <Compile Include="Source\Literal\CPPFunctionCommentLiteralFormatter.cs" />
+    <Compile Include="Source\Literal\DocumentLiteralFormatter.cs" />
+    <Compile Include="Source\Literal\ILiteralFormatter.cs" />
+    <Compile Include="Source\Options\CustomControll\CustomDataGrid.cs" />
+    <Compile Include="Source\Singleton\EditPointManager.cs" />
+    <Compile Include="Source\Commands\GenerateCPPComment.cs" />
+    <Compile Include="Source\Commands\OpenOptionPageCommand.cs" />
+    <Compile Include="Source\Options\CPPUtilityOption.cs" />
+    <Compile Include="Source\Options\CPPUtilityOptionPage.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Options\CPPUtilityOptions.xaml.cs">
+    <Compile Include="Source\Options\CPPUtilityOptions.xaml.cs">
       <DependentUpon>CPPUtilityOptions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TextEditor\InsertTextManager.cs" />
-    <Compile Include="Singleton\CommandManager.cs" />
-    <Compile Include="Commands\Discontinued\AutomaticallyAddConstIncludeTemplateCommand.cs" />
-    <Compile Include="Commands\EscapeCommand.cs" />
-    <Compile Include="Commands\Discontinued\GenerateConstructorCommand.cs" />
+    <Compile Include="Source\TextEditor\InsertTextManager.cs" />
+    <Compile Include="Source\Singleton\CommandManager.cs" />
+    <Compile Include="Source\Commands\Discontinued\AutomaticallyAddConstIncludeTemplateCommand.cs" />
+    <Compile Include="Source\Commands\EscapeCommand.cs" />
+    <Compile Include="Source\Commands\Discontinued\GenerateConstructorCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Commands\AutomaticallyAddConstCommand.cs" />
+    <Compile Include="Source\Commands\AutomaticallyAddConstCommand.cs" />
     <Compile Include="CPPUtilityPackage.cs" />
-    <Compile Include="Singleton\OutputWindow.cs" />
-    <Compile Include="Singleton\Singleton.cs" />
+    <Compile Include="Source\Singleton\OutputWindow.cs" />
+    <Compile Include="Source\Singleton\Singleton.cs" />
     <Compile Include="source.extension.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>source.extension.vsixmanifest</DependentUpon>
     </Compile>
-    <Compile Include="Utility\CodeModelUtility.cs" />
-    <Compile Include="Utility\DocumentUtility.cs" />
+    <Compile Include="Source\Utility\CodeModelUtility.cs" />
+    <Compile Include="Source\Utility\DocumentUtility.cs" />
     <Compile Include="VSCommandTable.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -95,15 +95,15 @@
       <Generator>VsixManifestGenerator</Generator>
       <LastGenOutput>source.extension.cs</LastGenOutput>
     </None>
-    <Page Include="Options\CustomControll\Themes\Generic.xaml">
+    <Page Include="Source\Options\CustomControll\Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Content Include=".gitignore" />
-    <Content Include="Resources\Icon.png">
+    <Content Include="Source\Resources\Icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Page Include="Options\MultipleLineEditDialog.xaml">
+    <Page Include="Source\Options\MultipleLineEditDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -137,7 +137,7 @@
     <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.0.5232" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Options\CPPUtilityOptions.xaml">
+    <Page Include="Source\Options\CPPUtilityOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
