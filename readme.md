@@ -1,5 +1,9 @@
 # CPPUtility
+Visual Studio 2022 の拡張機能。
+
 C++を書くときに使える機能の詰め合わせになる予定です。
+
+ダウンロードは[Releases](https://github.com/Shi-553/CPPUtility/releases)から。
 
 &nbsp;
 
