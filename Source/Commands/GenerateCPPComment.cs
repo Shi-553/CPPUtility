@@ -183,6 +183,9 @@ namespace CPPUtility
             }
             var headerComment = GetHeaderFunctionComment(codeFunction);
 
+            if (string.IsNullOrEmpty(headerComment))
+                return false;
+
             snippet = SingletonHelper<CPPFunctionCommentLiteralFormatter>.Instance
                 .FormatLiteral(snippet, new CPPFunctionCommentLiteralData(headerComment));
 
@@ -196,24 +199,28 @@ namespace CPPUtility
 
             var headerComment = codeFunction.Comment;
 
-            if (string.IsNullOrEmpty(headerComment))
+            if (!string.IsNullOrEmpty(headerComment))
             {
-                var startPoint = CodeModelUtility.GetHeaderFunctionStartPoint(codeFunction);
-                startPoint.LineUp();
-                var beforeLine = startPoint.GetLines(startPoint.Line, startPoint.Line + 1);
-
-                var commentGroupName = "comment";
-                var match = Regex.Match(beforeLine, $@"^\s*//\s*(?<{commentGroupName}>.+)");
-                if (match.Success)
-                {
-                    headerComment = match.Groups[commentGroupName].Value;
-                }
+                return headerComment;
             }
 
-            if (string.IsNullOrEmpty(headerComment))
-                headerComment = BasicLiteralFormatter.EDIT_POINT_LITERAL;
+            var startPoint = CodeModelUtility.GetHeaderFunctionStartPoint(codeFunction);
 
-            return headerComment;
+            if (startPoint.Parent == documentPair.cpp)
+            {
+                return BasicLiteralFormatter.EDIT_POINT_LITERAL;
+            }
+
+
+            var beforeLine = startPoint.GetLines(startPoint.Line - 1, startPoint.Line);
+
+            var match = Regex.Match(beforeLine, @"^\s*//\s*(.+)");
+            if (match.Success)
+            {
+                return match.Groups[1].Value;
+            }
+
+            return string.Empty;
         }
 
         async Task GenerateCPPDocmentTopCommentAsync()
