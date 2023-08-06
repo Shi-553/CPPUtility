@@ -69,7 +69,7 @@ namespace CPPUtility
         {
             ThreadHelper.ThrowIfNotOnUIThread();
             var vcCodeFunction = codeFunction as VCCodeFunction;
-            return vcCodeFunction.StartPointOf[vsCMPart.vsCMPartAttributesWithDelimiter, vsCMWhere.vsCMWhereDeclaration].CreateEditPoint();
+            return vcCodeFunction.StartPointOf[vsCMPart.vsCMPartHeader, vsCMWhere.vsCMWhereDeclaration].CreateEditPoint();
         }
     }
 

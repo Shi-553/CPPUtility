@@ -17,6 +17,8 @@ namespace CPPUtility
             this.insertText = insertText;
         }
     }
+    
+
     internal class InsertTextManager
     {
         List<InsertInfo> insertInfos = new List<InsertInfo>();
@@ -25,8 +27,12 @@ namespace CPPUtility
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            var spaceLength = functionStartPoint.LineCharOffset - 1;
-            var space = functionStartPoint.GetText(-spaceLength);
+
+            var lineText = functionStartPoint.GetLines(functionStartPoint.Line, functionStartPoint.Line + 1);
+
+            var spaceMatch = Regex.Match(lineText, @"^(\s*)");
+
+            var space = spaceMatch.Groups[1].Value;
 
             functionStartPoint.StartOfLine();
 
@@ -80,15 +86,18 @@ namespace CPPUtility
         }
 
 
-        public List<EditPoint> ExecuteInsertAndFindEditPoints()
+        public List<EditSnippetInfo> ExecuteInsertAndFindEditPoints()
         {
             ThreadHelper.ThrowIfNotOnUIThread();
-            List<EditPoint> editPoints = new List<EditPoint>();
+            List<EditSnippetInfo> editSnippetPoints = new List<EditSnippetInfo>();
 
             foreach (var info in insertInfos)
             {
-                var offset=info.editPoint.AbsoluteCharOffset;
+                var offset = info.editPoint.AbsoluteCharOffset;
                 info.editPoint.Insert(info.insertText);
+
+
+                List<EditPoint> editPoints = new List<EditPoint>();
 
                 var mathes = Regex.Matches(info.insertText.Replace("\r\n", "\n"), BasicLiteralFormatter.EDIT_POINT_LITERAL);
                 foreach (Match match in mathes)
@@ -97,11 +106,13 @@ namespace CPPUtility
                     edit.MoveToAbsoluteOffset(offset + match.Index);
                     editPoints.Add(edit);
                 }
+
+                editSnippetPoints.Add(new EditSnippetInfo(info,editPoints));
             }
 
             insertInfos.Clear();
 
-            return editPoints;
+            return editSnippetPoints;
         }
         public void ExecuteInsert()
         {
