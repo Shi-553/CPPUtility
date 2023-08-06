@@ -20,10 +20,10 @@ namespace CPPUtility
             ThreadHelper.ThrowIfNotOnUIThread();
 
             //Check whether the compared objects reference the same data.
-            if (Object.ReferenceEquals(x, y)) return true;
+            if (ReferenceEquals(x, y)) return true;
 
             //Check whether any of the compared objects is null.
-            if (Object.ReferenceEquals(x, null) || Object.ReferenceEquals(y, null))
+            if (x is null || y is null)
                 return false;
 
             return x.FullName == y.FullName &&
@@ -34,7 +34,7 @@ namespace CPPUtility
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            if (Object.ReferenceEquals(product, null)) return 0;
+            if (product is null) return 0;
 
             return product.FullName.GetHashCode() ^ product.StartPoint.AbsoluteCharOffset.GetHashCode();
         }

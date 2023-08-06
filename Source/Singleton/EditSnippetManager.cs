@@ -19,7 +19,7 @@ namespace CPPUtility
             Failure,
         }
         InsertInfo insertInfo;
-        Queue<EditPoint> editSnippetPoints;
+        readonly Queue<EditPoint> editSnippetPoints;
 
         public bool IsEmpty => !editSnippetPoints.Any();
         public bool IsSelectionSameLine

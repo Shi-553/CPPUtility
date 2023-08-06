@@ -21,7 +21,7 @@ namespace CPPUtility
 
     internal class InsertTextManager
     {
-        List<InsertInfo> insertInfos = new List<InsertInfo>();
+        readonly List<InsertInfo> insertInfos = new List<InsertInfo>();
 
         public bool InsertReservationFunctionComment(EditPoint functionStartPoint, string comment)
         {
