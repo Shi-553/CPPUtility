@@ -30,37 +30,6 @@
 	  </Menus>
 		  
     <Buttons>
-      <Button guid="CPPUtility" id="AutomaticallyAddConstCommand" priority="0x0100" type="Button">
-        <Parent guid="CPPUtility" id="CPPUtilityMenuSubGroup" />
-	    <Icon guid="ImageCatalogGuid" id="Constant" />
-        <CommandFlag>IconIsMoniker</CommandFlag>
-        <Strings>
-          <ButtonText>Automatically Add Const</ButtonText>
-          <LocCanonicalName>.CPPUtility.AutomaticallyAddConstCommand</LocCanonicalName>
-        </Strings>
-      </Button>
-		
-      <!--<Button guid="CPPUtility" id="AutomaticallyAddConstIncludeTemplateCommand" priority="0x0101" type="Button">
-        <Parent guid="CPPUtility" id="CPPUtilityMenuSubGroup" />
-	    <Icon guid="ImageCatalogGuid" id="Constant" />
-        <CommandFlag>IconIsMoniker</CommandFlag>
-        <Strings>
-          <ButtonText>Automatically Add Const Include Template</ButtonText>
-          <LocCanonicalName>.CPPUtility.AutomaticallyAddConstIncludeTemplateCommand</LocCanonicalName>
-        </Strings>
-      </Button>-->
-		
-      <!--<Button guid="CPPUtility" id="GenerateConstructorCommand" priority="0x0102" type="Button">
-        <Parent guid="CPPUtility" id="CPPUtilityMenuSubGroup" />
-		<Icon guid="ImageCatalogGuid" id="GenerateMethod" />
-        <CommandFlag>IconIsMoniker</CommandFlag>
-        <Strings>
-          <ButtonText>Generate Constructor Command</ButtonText>
-          <LocCanonicalName>.CPPUtility.GenerateConstructorCommand</LocCanonicalName>
-        </Strings>
-      </Button>-->
-
-
 		<Button guid="CPPUtility" id="CreateHeaderComment" priority="0x0101" type="Button">
 			<Parent guid="CPPUtility" id="CPPUtilityMenuSubGroup" />
 			<Icon guid="ImageCatalogGuid" id="GenerateFile" />

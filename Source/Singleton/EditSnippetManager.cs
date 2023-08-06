@@ -109,13 +109,16 @@ namespace CPPUtility
         public bool ExecuteEdit(List<EditSnippetInfo> editPoints, EndType allowEndType, Action<EndType> onEndEdit = null)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
-            if (editPoints == null || editPoints.Count == 0)
+
+            var queue = new Queue<EditSnippetInfo>(editPoints.Where(point => !point.IsEmpty));
+
+            if (!queue.Any())
             {
                 return false;
             }
 
             isEditing = true;
-            this.snippetPoints = new Queue<EditSnippetInfo>(editPoints.Where(point => !point.IsEmpty));
+            this.snippetPoints = queue;
             this.onEndEdit = onEndEdit;
             this.allowEndType = allowEndType;
             currentSnippetPoint = snippetPoints.Dequeue();
