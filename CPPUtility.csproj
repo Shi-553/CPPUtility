@@ -67,7 +67,6 @@
     </Compile>
     <Compile Include="Source\TextEditor\InsertTextManager.cs" />
     <Compile Include="Source\Singleton\CommandManager.cs" />
-    <Compile Include="Source\Commands\EscapeCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CPPUtilityPackage.cs" />
     <Compile Include="Source\Singleton\OutputWindow.cs" />

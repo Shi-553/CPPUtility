@@ -51,16 +51,6 @@
 		</Button>
 		
 		
-      <Button guid="CPPUtility" id="EscapeCommand" priority="0x0400" type="Button">
-        <Parent guid="CPPUtility" id="CPPUtilityMenuSubGroup" />
-	    <Icon guid="ImageCatalogGuid" id="StopQuery" />
-        <CommandFlag>IconIsMoniker</CommandFlag>
-        <Strings>
-          <ButtonText>Stop Command</ButtonText>
-          <LocCanonicalName>.CPPUtility.EscapeCommand</LocCanonicalName>
-        </Strings>
-      </Button>
-		
       <Button guid="CPPUtility" id="OpenOptionPageCommand" priority="0x0500" type="Button">
         <Parent guid="CPPUtility" id="CPPUtilityMenuSubGroup" />
 	    <Icon guid="ImageCatalogGuid" id="Settings" />
