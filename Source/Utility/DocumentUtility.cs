@@ -245,7 +245,13 @@ namespace CPPUtility
                     if (!string.IsNullOrWhiteSpace(match.Value))
                     {
                         editPoint.MoveToLineAndOffset(line, match.Index + 1);
-                        return editPoint.GetText(-editPoint.AbsoluteCharOffset);
+
+                        var result= editPoint.GetText(-editPoint.AbsoluteCharOffset);
+
+                        if (string.IsNullOrWhiteSpace(result))
+                            return string.Empty;
+
+                        return result;
                     }
                 }
 
