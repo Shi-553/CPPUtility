@@ -11,7 +11,7 @@ namespace CPPUtility
         public const string Name = "CPPUtility";
         public const string Description = @"Empty VSIX Project.";
         public const string Language = "en-US";
-        public const string Version = "1.2";
+        public const string Version = "1.3";
         public const string Author = "晴彦 柴田";
         public const string Tags = "";
     }
