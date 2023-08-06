@@ -63,7 +63,7 @@ namespace CPPUtility
 
             dte.UndoContext.Open($"Create Header Comment.");
 
-            List<EditPoint> editPoints;
+            List<EditSnippetInfo> editPoints;
 
             try
             {
@@ -93,8 +93,8 @@ namespace CPPUtility
                 return;
             }
 
-            EditPointManager.Instance.ExecuteEdit(editPoints,
-                EditPointManager.EndType.SuccessInOtherLine,
+            EditSnippetManager.Instance.ExecuteEdit(editPoints,
+                EditSnippetManager.EndType.SuccessInOtherLine,
                 type =>
                 {
                     _ = GenerateCPPCommentAsync();

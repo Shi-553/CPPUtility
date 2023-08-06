@@ -56,7 +56,7 @@
     <Compile Include="Source\Literal\DocumentLiteralFormatter.cs" />
     <Compile Include="Source\Literal\ILiteralFormatter.cs" />
     <Compile Include="Source\Options\CustomControll\CustomDataGrid.cs" />
-    <Compile Include="Source\Singleton\EditPointManager.cs" />
+    <Compile Include="Source\Singleton\EditSnippetManager.cs" />
     <Compile Include="Source\Commands\GenerateCPPComment.cs" />
     <Compile Include="Source\Commands\OpenOptionPageCommand.cs" />
     <Compile Include="Source\Options\CPPUtilityOption.cs" />

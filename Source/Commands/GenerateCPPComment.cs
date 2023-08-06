@@ -113,8 +113,8 @@ namespace CPPUtility
                 var editPoints = insertManager.ExecuteInsertAndFindEditPoints();
 
 
-                EditPointManager.Instance.ExecuteEdit(editPoints,
-                    EditPointManager.EndType.Success);
+                EditSnippetManager.Instance.ExecuteEdit(editPoints,
+                    EditSnippetManager.EndType.Success);
             }
             finally
             {
