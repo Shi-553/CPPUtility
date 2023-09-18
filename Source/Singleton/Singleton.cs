@@ -20,7 +20,7 @@ namespace CPPUtility
                     return instance;
                 }
 
-                instance = new T();
+                instance = StaticClass<T>.Value;
                 IsInitalized = true;
 
                 return instance;
@@ -31,17 +31,14 @@ namespace CPPUtility
     // Instanceメンバーを持たず、Singleton Helperから取得してほしいときにここから継承する
     internal abstract class SingletonBase
     {
-        private static readonly Dictionary<Type, SingletonBase> instances = new Dictionary<Type, SingletonBase>();
 
         public SingletonBase()
         {
             var type = GetType();
-            if (instances.ContainsKey(type))
+            if (StaticClass.IsConstructed(type))
             {
                 throw new InvalidOperationException($"Duplicate Create Singleton class :{type}.");
             }
-            instances.Add(type, this);
-
 
             ThreadHelper.JoinableTaskFactory.RunAsync(async delegate
             {

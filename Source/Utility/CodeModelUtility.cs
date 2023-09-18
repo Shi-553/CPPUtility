@@ -48,21 +48,28 @@ namespace CPPUtility
             }
             return ret;
         }
-        public static List<CodeElement> CodeElementsRecursively(CodeElements elements)
+        public static HashSet<CodeElement> GetCodeElementsChildrenRecursively(CodeElements elements)
+        {
+            var ret = new HashSet<CodeElement>();
+
+            GetCodeElementsChildrenRecursivelyImpl(elements, ret);
+
+            return ret;
+        }
+        static void GetCodeElementsChildrenRecursivelyImpl(CodeElements elements,HashSet<CodeElement> codeElements)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            var ret = new List<CodeElement>();
-            if (elements == null) return ret;
+            if (elements == null) 
+                return ;
 
             foreach (CodeElement codeElement in elements)
             {
-                ret.Add(codeElement);
-
-                ret.AddRange(CodeElementsRecursively(codeElement.Children));
+                if (codeElements.Add(codeElement))
+                {
+                    GetCodeElementsChildrenRecursivelyImpl(codeElement.Children, codeElements);
+                }
             }
-
-            return ret;
         }
 
         public static EditPoint GetHeaderFunctionStartPoint(CodeFunction codeFunction)

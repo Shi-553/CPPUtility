@@ -52,7 +52,7 @@ namespace CPPUtility
         DocumentUtility.DocumentPair documentPair;
 
 
-        readonly InsertTextManager insertManager = new InsertTextManager();
+        readonly EditTextManager editTextManager = new EditTextManager();
 
         async Task<bool> InitAsync()
         {
@@ -101,7 +101,6 @@ namespace CPPUtility
                 // ヘッダーをもとにCPPの一番上のコメントを作る
                 await ErrorHandlingUtility.TryCatchTaskFuncAsync(GenerateCPPDocmentTopCommentAsync);
 
-
                 // ヘッダーをもとにCPPの関数のコメントを作る
                 var option = await CPPUtilityOption.GetLiveInstanceAsync();
                 if (option.IsUseGenerateCPPFunctionComment)
@@ -110,7 +109,7 @@ namespace CPPUtility
                 }
 
 
-                var editPoints = insertManager.ExecuteInsertAndFindEditPoints();
+                var editPoints = editTextManager.ExecuteEditAndFindEditPoints();
 
 
                 EditSnippetManager.Instance.ExecuteEdit(editPoints,
@@ -159,14 +158,14 @@ namespace CPPUtility
 
             if (headerProjectItem?.FileCodeModel != null)
             {
-                returns.AddRange(CodeModelUtility.CodeElementsRecursively(headerProjectItem.FileCodeModel.CodeElements));
+                returns.AddRange(CodeModelUtility.GetCodeElementsChildrenRecursively(headerProjectItem.FileCodeModel.CodeElements));
             }
 
             var cppProjectItem = documentPair.cpp.Parent?.ProjectItem;
 
             if (cppProjectItem?.FileCodeModel != null)
             {
-                returns.AddRange(CodeModelUtility.CodeElementsRecursively(cppProjectItem.FileCodeModel.CodeElements));
+                returns.AddRange(CodeModelUtility.GetCodeElementsChildrenRecursively(cppProjectItem.FileCodeModel.CodeElements));
             }
 
             return returns.Distinct(new CodeElementComparer()).ToArray();
@@ -190,7 +189,7 @@ namespace CPPUtility
                 .FormatLiteral(snippet, new CPPFunctionCommentLiteralData(headerComment));
 
             var cppFunctionStartPoint = codeFunction.StartPoint.CreateEditPoint();
-            return insertManager.InsertReservationFunctionComment(cppFunctionStartPoint, snippet);
+            return editTextManager.InsertReservationFunctionComment(cppFunctionStartPoint, snippet);
         }
 
         string GetHeaderFunctionComment(CodeFunction codeFunction)
@@ -241,7 +240,7 @@ namespace CPPUtility
                 return;
             }
 
-            insertManager.InsertReservation(new InsertInfo(documentPair.cpp.StartPoint.CreateEditPoint(), documentTopCommentCPP));
+            editTextManager.EditReservation(new EditInfo(documentPair.cpp.StartPoint.CreateEditPoint(), documentTopCommentCPP));
         }
 
 

@@ -1,27 +1,44 @@
 ﻿using EnvDTE;
 using Microsoft.VisualStudio.Shell;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace CPPUtility
 {
-    internal struct InsertInfo
+    internal struct EditInfo
     {
-        public string insertText;
         public EditPoint editPoint;
+        public Action editAction;
+        public string insertText;
 
-        public InsertInfo(EditPoint editPoint, string insertText)
+        public EditInfo(EditPoint editPoint, string insertText)
         {
             this.editPoint = editPoint;
             this.insertText = insertText;
+            editAction = null;
+        }
+        public EditInfo(EditPoint editPoint, Action editAction)
+        {
+            this.editPoint = editPoint;
+            this.editAction = editAction;
+            insertText = "";
+        }
+
+        public void Execute()
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            editAction?.Invoke();
+            editPoint.Insert(insertText);
         }
     }
-    
 
-    internal class InsertTextManager
+
+    internal class EditTextManager
     {
-        readonly List<InsertInfo> insertInfos = new List<InsertInfo>();
+        readonly List<EditInfo> insertInfos = new List<EditInfo>();
 
         public bool InsertReservationFunctionComment(EditPoint functionStartPoint, string comment)
         {
@@ -66,27 +83,23 @@ namespace CPPUtility
                 insertText += "\n";
             }
 
-            InsertReservation(new InsertInfo(functionStartPoint, insertText));
+            EditReservation(new EditInfo(functionStartPoint, insertText));
 
             return true;
         }
 
-        public void InsertReservation(EditPoint editPoint, string comment)
-        {
-            insertInfos.Add(new InsertInfo(editPoint, comment));
-        }
-        public void InsertReservation(InsertInfo insertInfo)
+        public void EditReservation(EditInfo insertInfo)
         {
             insertInfos.Add(insertInfo);
         }
 
-        public int GetInsertReservationCount()
+        public int GetEditReservationCount()
         {
             return insertInfos.Count;
         }
 
 
-        public List<EditSnippetInfo> ExecuteInsertAndFindEditPoints()
+        public List<EditSnippetInfo> ExecuteEditAndFindEditPoints()
         {
             ThreadHelper.ThrowIfNotOnUIThread();
             List<EditSnippetInfo> editSnippetPoints = new List<EditSnippetInfo>();
@@ -94,8 +107,8 @@ namespace CPPUtility
             foreach (var info in insertInfos)
             {
                 var offset = info.editPoint.AbsoluteCharOffset;
-                info.editPoint.Insert(info.insertText);
 
+                info.Execute();
 
                 List<EditPoint> editPoints = new List<EditPoint>();
 
@@ -107,20 +120,20 @@ namespace CPPUtility
                     editPoints.Add(edit);
                 }
 
-                editSnippetPoints.Add(new EditSnippetInfo(info,editPoints));
+                editSnippetPoints.Add(new EditSnippetInfo(info, editPoints));
             }
 
             insertInfos.Clear();
 
             return editSnippetPoints;
         }
-        public void ExecuteInsert()
+        public void ExecuteEdit()
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
             foreach (var info in insertInfos)
             {
-                info.editPoint.Insert(info.insertText);
+                info.Execute();
             }
 
             insertInfos.Clear();

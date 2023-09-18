@@ -45,15 +45,29 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Source\CommandFilter\CommandFilter.cs" />
+    <Compile Include="Source\Commands\FormatVariablesCommand.cs" />
     <Compile Include="Source\Commands\CreateHeaderComment.cs" />
+    <Compile Include="Source\Utility\DependencyObjectHelper.cs" />
+    <Compile Include="Source\Options\FrameworkInput\EnumInputInfo.cs" />
+    <Compile Include="Source\Options\FrameworkInput\IFrameworkElementInputInfo.cs" />
+    <Compile Include="Source\Options\FrameworkInput\RegexMatchInputInfo.cs" />
+    <Compile Include="Source\Options\FrameworkInput\RegexReplaceInputInfo.cs" />
+    <Compile Include="Source\Options\FrameworkInput\TextInputInfo.cs" />
     <Compile Include="Source\Options\MultipleLineEditDialog.xaml.cs">
       <DependentUpon>MultipleLineEditDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Source\Utility\TaskUtility.cs" />
-    <Compile Include="Source\Literal\BasicLiteralFormatter.cs" />
-    <Compile Include="Source\Literal\CPPFunctionCommentLiteralFormatter.cs" />
-    <Compile Include="Source\Literal\DocumentLiteralFormatter.cs" />
-    <Compile Include="Source\Literal\ILiteralFormatter.cs" />
+    <Compile Include="Source\Options\SubclassSelectorTypes.cs" />
+    <Compile Include="Source\Utility\RefrectionUtility.cs" />
+    <Compile Include="Source\VariableFormat\ICodeVariableLike.cs" />
+    <Compile Include="Source\VariableFormat\VariableFormatHelper.cs" />
+    <Compile Include="Source\VariableFormat\VariableDelimiterType.cs" />
+    <Compile Include="Source\VariableFormat\VariableFormatInfo.cs" />
+    <Compile Include="Source\Singleton\StaticClass.cs" />
+    <Compile Include="Source\Utility\ErrorHandlingUtility.cs" />
+    <Compile Include="Source\LiteralFormatter\BasicLiteralFormatter.cs" />
+    <Compile Include="Source\LiteralFormatter\CPPFunctionCommentLiteralFormatter.cs" />
+    <Compile Include="Source\LiteralFormatter\DocumentLiteralFormatter.cs" />
+    <Compile Include="Source\LiteralFormatter\ILiteralFormatter.cs" />
     <Compile Include="Source\Options\CustomControll\CustomDataGrid.cs" />
     <Compile Include="Source\Singleton\EditSnippetManager.cs" />
     <Compile Include="Source\Commands\GenerateCPPComment.cs" />
@@ -65,7 +79,7 @@
     <Compile Include="Source\Options\CPPUtilityOptions.xaml.cs">
       <DependentUpon>CPPUtilityOptions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Source\TextEditor\InsertTextManager.cs" />
+    <Compile Include="Source\TextEditor\EditTextManager.cs" />
     <Compile Include="Source\Singleton\CommandManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CPPUtilityPackage.cs" />
@@ -78,6 +92,15 @@
     </Compile>
     <Compile Include="Source\Utility\CodeModelUtility.cs" />
     <Compile Include="Source\Utility\DocumentUtility.cs" />
+    <Compile Include="Source\VariableFormat\Formatter\VariableFormatterBase.cs" />
+    <Compile Include="Source\VariableFormat\Formatter\PrefixVariableFormatter.cs" />
+    <Compile Include="Source\VariableFormat\Formatter\RegexVariableFormatter.cs" />
+    <Compile Include="Source\VariableFormat\Formatter\SuffixVariableFormatter.cs" />
+    <Compile Include="Source\VariableFormat\ISubClassSelectable.cs" />
+    <Compile Include="Source\VariableFormat\VariableSelector\NameRegexMatchVariableSelector.cs" />
+    <Compile Include="Source\VariableFormat\VariableSelector\ScopeVariableSelector.cs" />
+    <Compile Include="Source\VariableFormat\VariableSelector\TypeRegexMatchVariableSelector.cs" />
+    <Compile Include="Source\VariableFormat\VariableSelector\VariableSelectorBase.cs" />
     <Compile Include="VSCommandTable.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -127,9 +150,19 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Community.VisualStudio.Toolkit.Analyzers">
+      <Version>1.0.507</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Community.VisualStudio.VSCT" Version="16.0.29.6" PrivateAssets="all" />
-    <PackageReference Include="Community.VisualStudio.Toolkit.17" Version="17.0.430" ExcludeAssets="Runtime" />
-    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.0.5232" />
+    <PackageReference Include="Community.VisualStudio.Toolkit.17" Version="17.0.507" ExcludeAssets="Runtime">
+      <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.7.2196">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Source\Options\CPPUtilityOptions.xaml">

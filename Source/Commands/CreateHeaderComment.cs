@@ -24,7 +24,7 @@ namespace CPPUtility
         DTE2 dte;
         TextDocument headerDocument;
 
-        readonly InsertTextManager insertManager = new InsertTextManager();
+        readonly EditTextManager editTextManager = new EditTextManager();
 
         async Task<bool> InitAsync()
         {
@@ -79,7 +79,7 @@ namespace CPPUtility
                 }
 
 
-                editPoints = insertManager.ExecuteInsertAndFindEditPoints();
+                editPoints = editTextManager.ExecuteEditAndFindEditPoints();
 
             }
             finally
@@ -110,7 +110,7 @@ namespace CPPUtility
             if (headerProjectItem?.FileCodeModel == null)
                 return;
 
-            var headerCodeElements = CodeModelUtility.CodeElementsRecursively(headerProjectItem.FileCodeModel.CodeElements);
+            var headerCodeElements = CodeModelUtility.GetCodeElementsChildrenRecursively(headerProjectItem.FileCodeModel.CodeElements);
 
 
             foreach (CodeElement headerElement in headerCodeElements)
@@ -126,7 +126,7 @@ namespace CPPUtility
                 ErrorHandlingUtility.TryCatchAction(() =>
                 {
                     var functionStartPoint = CodeModelUtility.GetHeaderFunctionStartPoint(headerFunction);
-                    insertManager.InsertReservationFunctionComment(functionStartPoint, insertText);
+                    editTextManager.InsertReservationFunctionComment(functionStartPoint, insertText);
                 },
                 false);
             }
@@ -147,7 +147,7 @@ namespace CPPUtility
             snippet = SingletonHelper<DocumentLiteralFormatter>.Instance
                 .FormatLiteral(snippet, new DocumentLiteralData(headerDocument));
 
-            insertManager.InsertReservation(new InsertInfo(headerDocument.StartPoint.CreateEditPoint(), snippet));
+            editTextManager.EditReservation(new EditInfo(headerDocument.StartPoint.CreateEditPoint(), snippet));
         }
 
 

@@ -31,7 +31,8 @@ namespace CPPUtility
         public const int GenerateConstructorCommand = 0x0102;
         public const int EscapeCommand = 0x0103;
         public const int GenerateCPPComment = 0x0104;
-        public const int OpenOptionPageCommand = 0x0105;
-        public const int CreateHeaderComment = 0x0106;
+        public const int CreateHeaderComment = 0x0105;
+        public const int OpenOptionPageCommand = 0x0106;
+        public const int FormatVariables = 0x0107;
     }
 }

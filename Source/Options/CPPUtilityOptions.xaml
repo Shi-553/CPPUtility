@@ -1,37 +1,99 @@
 ﻿<UserControl x:Class="CPPUtility.CPPUtilityOptions"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CPPUtility"
-             mc:Ignorable="d" Width="462" Height="480">
+             xmlns:local="clr-namespace:CPPUtility" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d:DataContext="{d:DesignInstance Type=local:CPPUtilityOption}"
+             mc:Ignorable="d"
+             Width="462" Height="594"
+             
+             >
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="b2v" />
+
+
+        <local:VariableSelectorTypes x:Key="VariableSelectorTypes"/>
+        <local:VariableFormatterTypes x:Key="VariableFormatterTypes"/>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="22" />
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="22" />
+        </Style>
+
+        <Style x:Key="CharButton" TargetType="Button">
+            <Setter Property="Padding" Value="0,-2,0,0" />
+            <Setter Property="Width" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=ActualHeight}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
+        
+        <DataTemplate DataType="{x:Type local:TextInputInfo}">
+            <StackPanel>
+                <Label Content="Input"/>
+                <TextBox Text="{Binding Text,UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type local:RegexMatchInputInfo}">
+            <StackPanel>
+                <Label Content="Regex Match"/>
+                <TextBox Text="{Binding MatchText,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type local:RegexReplaceInputInfo}">
+            <StackPanel>
+                <Label Content="Regex Replace"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Text="{Binding MatchText,UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox Text="{Binding ReplacementText,UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type local:EnumInputInfoBase}">
+            <StackPanel>
+                <Label Content="Scope"/>
+                <ComboBox 
+                          SelectedValue="{Binding EnumString, Mode=OneWay}"
+                          SelectionChanged="ComboBox_SelectionChanged"
+                          ItemsSource="{Binding EnumAllStrings}"/>
+
+            </StackPanel>
+        </DataTemplate>
+
+
+
     </UserControl.Resources>
     <ScrollViewer>
-        <Grid>
+        <Grid  Margin="0,0,0,100">
 
             <Label  x:Name="Title" Content="CPPUtility" Margin="18,10,0,0" FontSize="20" HorizontalAlignment="Left" Width="101" Height="38" VerticalAlignment="Top"/>
 
 
 
-            <Label x:Name="DocumentTopCommentSnippetLabel" HorizontalContentAlignment="Center" Content="Document Top Comment Snippet" Margin="129,52,129,0" Height="30" VerticalAlignment="Top"/>
+            <Label x:Name="DocumentTopCommentSnippetLabel" HorizontalContentAlignment="Center"
+                   Content="Document Top Comment Snippet" Margin="129,52,129,0" 
+                   Height="30" VerticalAlignment="Top"/>
 
             <TextBox   VerticalScrollBarVisibility="Visible" 
                    HorizontalScrollBarVisibility="Auto"
                    x:Name="DocumentTopCommentSnippetTextbox" Margin="79,82,80,0" TextWrapping="NoWrap" 
-                   Text="" VerticalAlignment="Top" Height="100"
+                   Text="{Binding DocumentTopCommentSnippet,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="100" MinWidth="500"
                    PreviewMouseDown="DocumentTopCommentSnippet_PreviewMouseDown"
                    PreviewMouseWheel="DocumentTopCommentSnippetTextbox_PreviewMouseWheel"/>
 
 
             <CheckBox x:Name="IsUseCreateHeaderFunctionCommentCheckBox" Content="Use Create Header Function Comment" HorizontalAlignment="Center" 
-                      Unchecked="IsUseCreateHeaderFunctionCommentCheckBox_Changed"
-                      Checked="IsUseCreateHeaderFunctionCommentCheckBox_Changed" Margin="0,232,0,233"/>
+                      IsChecked="{Binding IsUseCreateHeaderFunctionComment}"
+                      Margin="0,232,0,233"/>
 
             <CheckBox x:Name="IsUseGenerateCPPFunctionCommentCheckBox" Content="Use Generate CPP Function Comment" HorizontalAlignment="Center" Margin="0,264,0,0" VerticalAlignment="Top" 
-                      Unchecked="IsUseGenerateCPPFunctionCommentCheckBox_Changed"
-                      Checked="IsUseGenerateCPPFunctionCommentCheckBox_Changed"/>
+                      IsChecked="{Binding IsUseGenerateCPPFunctionComment}"/>
 
             <Label Visibility="{Binding IsChecked,ElementName=IsUseCPPFunctionCommentCheckBox,Converter={StaticResource b2v}}" 
                    x:Name="CPPFunctionCommentSnippetLabel" HorizontalContentAlignment="Center" Content="CPP Function Comment Snippet" Margin="128,284,128,0" Height="30" VerticalAlignment="Top"/>
@@ -39,10 +101,84 @@
             <TextBox  Visibility="{Binding IsChecked,ElementName=IsUseCPPFunctionCommentCheckBox,Converter={StaticResource b2v}}" 
                    VerticalScrollBarVisibility="Visible" 
                    HorizontalScrollBarVisibility="Auto"
-                   x:Name="CPPFunctionCommentSnippetTextbox" Margin="80,319,80,0" TextWrapping="NoWrap" 
-                   Text="" VerticalAlignment="Top" Height="100"
+                   x:Name="CPPFunctionCommentSnippetTextbox" Margin="80,319,65,0" TextWrapping="NoWrap" 
+                   Text="{Binding CPPFunctionCommentSnippet,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="100" MinWidth="500"
                    PreviewMouseDown="CPPFunctionCommentSnippetTextBox_PreviewMouseDown"/>
 
+
+            <Label HorizontalContentAlignment="Center" Content="Variable Formatted Test Regex" Margin="127,460,129,0" Height="30" VerticalAlignment="Top"/>
+
+            <TextBox Text="{Binding VariableFormattedTestRegexText, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                     Margin="146,490,149,0" Width="150" Height="22" VerticalAlignment="Top"
+                     />
+
+
+            <Label HorizontalContentAlignment="Center" Content="Variable Format Infos" Margin="127,530,129,0" Height="30" VerticalAlignment="Top"/>
+
+            <Button Content="+"  Style="{StaticResource CharButton}" Height="24"
+                    Background="LightGreen"
+                    Margin="127,530,294,0" 
+                    Click="AddVariableFormatInfoButton_Click"
+                    FontWeight="Bold"
+                    FontSize="15" VerticalAlignment="Top"
+                    ></Button>
+
+
+            <ItemsControl x:Name="VariableFormatInfosItemsControl" Margin="92,560,80,0"
+                          ItemsSource="{Binding VariableFormatInfos}" HorizontalAlignment="Center" 
+                  >
+                <ItemsControl.Resources>
+                    <DataTemplate DataType="{x:Type local:VariableFormatInfo}">
+                        <Border BorderBrush="Black" Opacity="1" BorderThickness="0.5" Margin="0,0,0,0" >
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,8"  >
+
+                                <Button  Style="{StaticResource CharButton}"
+                                         Content="X" Height="24"
+                                        Background="Red" 
+                                        Margin="10,0,0,0"
+                                        Click="RemoveVariableFormatInfoButton_Click"></Button>
+                                
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                    <Button Content="↑"  Style="{StaticResource CharButton}"
+                                            Height="18"
+                                        Background="White" 
+                                        Margin="10,2"
+                                        Click="UpVariableFormatInfoButton_Click"></Button>
+                                    <Button Content="↓" Style="{StaticResource CharButton}"
+                                            Height="18"
+                                        Background="White" 
+                                        Margin="10,2"
+                                        Click="DownVariableFormatInfoButton_Click"></Button>
+                                </StackPanel>
+                            
+
+
+                                <StackPanel Orientation="Horizontal"  Margin="8,0" >
+                                    <ComboBox SelectedValue="{Binding Selector.SelectorName, Mode=OneWay}"
+                                      SelectionChanged="VariableSelectorComboBox_SelectionChanged"
+                                      ItemsSource="{StaticResource VariableSelectorTypes}" Margin="8,0" Width="100"/>
+
+                                    <ContentControl Content="{Binding Selector.FrameworkElementInputInfo}" Width="100"  Margin="8,0"/>
+                                </StackPanel>
+
+
+                                <StackPanel Orientation="Horizontal" Margin="8,0" >
+                                    <ComboBox SelectedValue="{Binding Formatter.FormattertName, Mode=OneWay}"
+                                      SelectionChanged="VariableFormatterComboBox_SelectionChanged"
+                                      ItemsSource="{StaticResource VariableFormatterTypes}" Margin="8,0" Width="70"/>
+
+                                    <ContentControl Content="{Binding Formatter.FrameworkElementInputInfo}"  Margin="8,0"/>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+
+                </ItemsControl.Resources>
+            </ItemsControl>
+
         </Grid>
+
+
     </ScrollViewer>
 </UserControl>

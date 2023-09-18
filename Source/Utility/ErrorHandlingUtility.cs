@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Threading;
+using System;
 using System.Threading.Tasks;
 
 namespace CPPUtility
 {
-    internal static class ErrorHandlingUtility
-    {
+    public static class ErrorHandlingUtility{
         public static async Task TryCatchTaskFuncAsync(Func<Task> task, bool isUseErrorLog = true)
         {
             try

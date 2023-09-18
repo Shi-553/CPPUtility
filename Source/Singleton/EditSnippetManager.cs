@@ -18,7 +18,7 @@ namespace CPPUtility
             Success,
             Failure,
         }
-        InsertInfo insertInfo;
+        EditInfo insertInfo;
         readonly Queue<EditPoint> editSnippetPoints;
 
         public bool IsEmpty => !editSnippetPoints.Any();
@@ -34,7 +34,7 @@ namespace CPPUtility
         public EditPoint CurrentEditPoint { private set; get; }
 
 
-        public EditSnippetInfo(InsertInfo insertInfo, List<EditPoint> editSnippetPoints)
+        public EditSnippetInfo(EditInfo insertInfo, List<EditPoint> editSnippetPoints)
         {
             this.insertInfo = insertInfo;
             this.editSnippetPoints = new Queue<EditPoint>(editSnippetPoints);

@@ -7,6 +7,10 @@ using System.Threading;
 
 namespace CPPUtility
 {
+
+    //[ProvideOptionPage(typeof(OptionsProvider.CPPUtilityOptions), "UPPUtility", "General", 0, 0, true)]
+    //[ProvideProfile(typeof(OptionsProvider.CPPUtilityOptions), "UPPUtility", "General", 0, 0, true)]
+
     [ProvideOptionPage(typeof(CPPUtilityOptionPage), "UPPUtility", "General", 0, 0, true)]
     [ProvideProfile(typeof(CPPUtilityOptionPage), "UPPUtility", "General", 0, 0, true)]
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
