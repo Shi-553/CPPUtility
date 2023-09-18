@@ -29,6 +29,7 @@ C++を書くときに使える機能の詰め合わせになる予定です。
 
 ## Format Variables
 アクティブなドキュメント変数と引数を定義した方法でフォーマットします。（現在キャメルケースのみ対応）
+
 [これ](https://forums.unrealengine.com/t/for-those-who-suffer-from-visual-studio-intellisense-slowness/49331/34)を設定したほうがいいかも
 
 ### オプション
