@@ -10,7 +10,7 @@ C++を書くときに使える機能の詰め合わせになる予定です。
 ## Create Header Comment
 ドキュメントの先頭 ＋ 全てのヘッダー関数にコメントのスニペットを追加します。
 
-その後、`{Edit}`にカーソルが移動して一つずつ編集できます。
+その後、`{Edit}`にカーソルが移動して一つずつ編集できます。(何もせず改行するとスキップ)
 
 ### オプション
 * ドキュメントの先頭コメントスニペットの編集（置き換え機能付き）
@@ -30,7 +30,7 @@ C++を書くときに使える機能の詰め合わせになる予定です。
 ## Format Variables
 アクティブなドキュメント変数と引数を定義した方法でフォーマットします。（現在キャメルケースのみ対応）
 
-[これ](https://forums.unrealengine.com/t/for-those-who-suffer-from-visual-studio-intellisense-slowness/49331)を設定したほうがいいかも
+UnrealEngineの場合、[これ](https://forums.unrealengine.com/t/for-those-who-suffer-from-visual-studio-intellisense-slowness/49331)を設定したほうがいいかも
 
 ### オプション
 * フォーマット済みかどうかを決めるRegex
