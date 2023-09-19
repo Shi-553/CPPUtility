@@ -33,5 +33,5 @@ C++を書くときに使える機能の詰め合わせになる予定です。
 UnrealEngineの場合、[これ](https://forums.unrealengine.com/t/for-those-who-suffer-from-visual-studio-intellisense-slowness/49331)を設定したほうがいいかも
 
 ### オプション
-* フォーマット済みかどうかを決めるRegex
+* フォーマット済みかどうかを判断するためのRegex
 * どんなときに、どういうフォーマットをするかをGUIで設定
