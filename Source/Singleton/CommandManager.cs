@@ -1,4 +1,6 @@
 ﻿using Microsoft.Build.Framework;
+using Microsoft.ServiceHub.Resources;
+using Microsoft.VisualStudio.Package;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,9 +20,20 @@ namespace CPPUtility
     {
         readonly HashSet<Task> tasks = new HashSet<Task>();
 
-        CancellationTokenSource source = new CancellationTokenSource();
+        CancellationTokenSource baseSource = new CancellationTokenSource();
 
+        public async Task ExecuteWithCancellationAsync(ICancellableCommand command, CancellationToken cancellationToken)
+        {
+            var linkedSource = CancellationTokenSource.CreateLinkedTokenSource(baseSource.Token, cancellationToken);
+
+            await ExecuteWithCancellationInternalAsync(command, linkedSource);
+        }
         public async Task ExecuteWithCancellationAsync(ICancellableCommand command)
+        {
+            await ExecuteWithCancellationInternalAsync(command, baseSource);
+        }
+
+        async Task ExecuteWithCancellationInternalAsync(ICancellableCommand command, CancellationTokenSource source)
         {
             try
             {
@@ -41,7 +54,7 @@ namespace CPPUtility
         {
             try
             {
-                source.Cancel();
+                baseSource.Cancel();
 
                 await Task.WhenAll(tasks);
 
@@ -52,7 +65,7 @@ namespace CPPUtility
             }
             finally
             {
-                source = new CancellationTokenSource();
+                baseSource = new CancellationTokenSource();
                 tasks.Clear();
             }
         }
