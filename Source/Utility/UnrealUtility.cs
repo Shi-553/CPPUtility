@@ -2,6 +2,7 @@
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,18 +34,49 @@ namespace CPPUtility
         }
 
 
-        static public string GetShortestIncludePath(string path)
+        static public string GetShortestIncludePath(TextDocument textDocument)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            var path = textDocument.Parent.FullName;
+
             string[] lastPaths = { "Source", "Public", "Classes" };
 
             var paths = path.Split('\\');
 
             for (int i = paths.Length - 1; i >= 0; i--)
             {
-                if (lastPaths.Contains(paths[i]))
+                var currentPath = paths[i];
+
+                if (lastPaths.Contains(currentPath))
                 {
+
+                    int resultPathStartIndex = i + 1;
+
+
+                    if (CPPUtilityOption.Instance.IsSkipGameModuleFolder)
+                    {
+                        // 最後がSourceのとき
+                        if (currentPath == "Source")
+                        {
+                            var projectName = textDocument.Parent.ProjectItem?.ContainingProject?.Name;
+
+                            // プロジェクトがUEから始まらないとき
+                            if (projectName != null && !projectName.StartsWith("UE"))
+                            {
+
+                                // パスにPluginsが無いとき
+                                if (!paths.Contains("Plugins"))
+                                {
+                                    // ゲームモジュールだと判断して、フォルダを一つ飛ばす
+                                    resultPathStartIndex += 1;
+                                }
+                            }
+                        }
+                    }
+
                     string result = "";
-                    for (int j = i + 1; j < paths.Length; j++)
+                    for (int j = resultPathStartIndex; j < paths.Length; j++)
                     {
                         result += paths[j];
 

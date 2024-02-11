@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d:DataContext="{d:DesignInstance Type=local:CPPUtilityOption}"
              mc:Ignorable="d"
-             Width="462" Height="594"
+             Width="462" Height="873"
              
              >
     <UserControl.Resources>
@@ -30,7 +30,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
 
-        
+
         <DataTemplate DataType="{x:Type local:TextInputInfo}">
             <StackPanel>
                 <Label Content="Input"/>
@@ -70,62 +70,88 @@
 
     </UserControl.Resources>
     <ScrollViewer>
-        <Grid  Margin="0,0,0,100">
+        <Grid  Margin="0,0,0,100" Height="805" Width="462">
+
+
 
             <Label  x:Name="Title" Content="CPPUtility" Margin="18,10,0,0" FontSize="20" HorizontalAlignment="Left" Width="101" Height="38" VerticalAlignment="Top"/>
 
 
 
+            <Label x:Name="GenerateCommentCategory" HorizontalContentAlignment="Center"
+                   Content="Generate Comment" Margin="154,49,159,0" 
+                   Height="30" VerticalAlignment="Top" FontSize="14"/>
+
+
             <Label x:Name="DocumentTopCommentSnippetLabel" HorizontalContentAlignment="Center"
-                   Content="Document Top Comment Snippet" Margin="129,52,129,0" 
-                   Height="30" VerticalAlignment="Top"/>
+                   Content="Document Top Comment Snippet" Margin="128,84,130,0" Height="30" VerticalAlignment="Top"/>
 
             <TextBox   VerticalScrollBarVisibility="Visible" 
                    HorizontalScrollBarVisibility="Auto"
-                   x:Name="DocumentTopCommentSnippetTextbox" Margin="79,82,80,0" TextWrapping="NoWrap" 
+                   x:Name="DocumentTopCommentSnippetTextbox" Margin="78,114,-133,0" TextWrapping="NoWrap" 
                    Text="{Binding DocumentTopCommentSnippet,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="100" MinWidth="500"
                    PreviewMouseDown="DocumentTopCommentSnippet_PreviewMouseDown"
                    PreviewMouseWheel="DocumentTopCommentSnippetTextbox_PreviewMouseWheel"/>
 
 
-            <CheckBox x:Name="IsUseCreateHeaderFunctionCommentCheckBox" Content="Use Create Header Function Comment" HorizontalAlignment="Center" 
+            <CheckBox x:Name="IsUseCreateHeaderFunctionCommentCheckBox" Content="Use Create Header Function Comment" HorizontalAlignment="Left" 
                       IsChecked="{Binding IsUseCreateHeaderFunctionComment}"
-                      Margin="0,232,0,233"/>
+                      Margin="112,241,0,537"/>
 
-            <CheckBox x:Name="IsUseGenerateCPPFunctionCommentCheckBox" Content="Use Generate CPP Function Comment" HorizontalAlignment="Center" Margin="0,264,0,0" VerticalAlignment="Top" 
+            <CheckBox x:Name="IsUseGenerateCPPFunctionCommentCheckBox" Content="Use Generate CPP Function Comment" HorizontalAlignment="Left" Margin="114,273,0,0" VerticalAlignment="Top" 
                       IsChecked="{Binding IsUseGenerateCPPFunctionComment}"/>
 
             <Label Visibility="{Binding IsChecked,ElementName=IsUseCPPFunctionCommentCheckBox,Converter={StaticResource b2v}}" 
-                   x:Name="CPPFunctionCommentSnippetLabel" HorizontalContentAlignment="Center" Content="CPP Function Comment Snippet" Margin="128,284,128,0" Height="30" VerticalAlignment="Top"/>
+                   x:Name="CPPFunctionCommentSnippetLabel" HorizontalContentAlignment="Center" Content="CPP Function Comment Snippet" Margin="128,293,128,0" Height="30" VerticalAlignment="Top"/>
 
             <TextBox  Visibility="{Binding IsChecked,ElementName=IsUseCPPFunctionCommentCheckBox,Converter={StaticResource b2v}}" 
                    VerticalScrollBarVisibility="Visible" 
                    HorizontalScrollBarVisibility="Auto"
-                   x:Name="CPPFunctionCommentSnippetTextbox" Margin="80,319,65,0" TextWrapping="NoWrap" 
+                   x:Name="CPPFunctionCommentSnippetTextbox" Margin="78,328,-133,0" TextWrapping="NoWrap" 
                    Text="{Binding CPPFunctionCommentSnippet,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="100" MinWidth="500"
                    PreviewMouseDown="CPPFunctionCommentSnippetTextBox_PreviewMouseDown"/>
 
 
-            <Label HorizontalContentAlignment="Center" Content="Variable Formatted Test Regex" Margin="127,460,129,0" Height="30" VerticalAlignment="Top"/>
+
+
+
+
+            <Label x:Name="AddIncludeCategory" HorizontalContentAlignment="Center"
+                   Content="Add Include" Margin="155,451,160,0" 
+                   Height="30" VerticalAlignment="Top" FontSize="14"/>
+
+            <CheckBox x:Name="IsSkipGameModuleFolder" Content="Is Skip Game Module Folder" HorizontalAlignment="Left" Margin="139,486,0,0" VerticalAlignment="Top" 
+                      IsChecked="{Binding IsSkipGameModuleFolder}"/>
+
+            
+            
+            
+            
+            <Label x:Name="VariableFormatCategory" HorizontalContentAlignment="Center"
+                   Content="Variable Format" Margin="150,535,165,0" 
+                   Height="30" VerticalAlignment="Top" FontSize="14"/>
+
+
+            <Label HorizontalContentAlignment="Center" Content="Variable Formatted Test Regex" Margin="124,570,132,0" Height="30" VerticalAlignment="Top"/>
 
             <TextBox Text="{Binding VariableFormattedTestRegexText, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                     Margin="146,490,149,0" Width="150" Height="22" VerticalAlignment="Top"
+                     Margin="151,600,161,0" Width="150" Height="22" VerticalAlignment="Top"
                      />
 
 
-            <Label HorizontalContentAlignment="Center" Content="Variable Format Infos" Margin="127,530,129,0" Height="30" VerticalAlignment="Top"/>
+            <Label HorizontalContentAlignment="Center" Content="Variable Format Infos" Margin="124,640,132,0" Height="30" VerticalAlignment="Top"/>
 
             <Button Content="+"  Style="{StaticResource CharButton}" Height="24"
                     Background="LightGreen"
-                    Margin="127,530,294,0" 
+                    Margin="132,640,306,0" 
                     Click="AddVariableFormatInfoButton_Click"
                     FontWeight="Bold"
                     FontSize="15" VerticalAlignment="Top"
                     ></Button>
 
 
-            <ItemsControl x:Name="VariableFormatInfosItemsControl" Margin="92,560,80,0"
-                          ItemsSource="{Binding VariableFormatInfos}" HorizontalAlignment="Center" 
+            <ItemsControl x:Name="VariableFormatInfosItemsControl" Margin="227,592,0,-32"
+                          ItemsSource="{Binding VariableFormatInfos}" HorizontalAlignment="Left" 
                   >
                 <ItemsControl.Resources>
                     <DataTemplate DataType="{x:Type local:VariableFormatInfo}">
@@ -137,7 +163,7 @@
                                         Background="Red" 
                                         Margin="10,0,0,0"
                                         Click="RemoveVariableFormatInfoButton_Click"></Button>
-                                
+
                                 <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                                     <Button Content="↑"  Style="{StaticResource CharButton}"
                                             Height="18"
@@ -150,7 +176,7 @@
                                         Margin="10,2"
                                         Click="DownVariableFormatInfoButton_Click"></Button>
                                 </StackPanel>
-                            
+
 
 
                                 <StackPanel Orientation="Horizontal"  Margin="8,0" >
@@ -176,7 +202,6 @@
 
                 </ItemsControl.Resources>
             </ItemsControl>
-
         </Grid>
 
 

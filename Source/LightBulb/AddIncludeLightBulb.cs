@@ -263,7 +263,7 @@ namespace CPPUtility
 
             if (await UnrealUtility.IsUnrealSolutionAsync())
             {
-                filePath = UnrealUtility.GetShortestIncludePath(filePath);
+                filePath = UnrealUtility.GetShortestIncludePath(definitionDocument);
             }
 
 

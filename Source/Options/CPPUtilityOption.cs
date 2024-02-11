@@ -51,6 +51,14 @@ namespace CPPUtility
 
 
 
+        // インクルードの追加
+
+
+        public bool IsSkipGameModuleFolder { get; set; } = true;
+
+
+
+
         // シリアライズ・デシリアライズ
 
 
