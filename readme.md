@@ -29,9 +29,15 @@ C++を書くときに使える機能の詰め合わせになる予定です。
 
 ## Format Variables
 アクティブなドキュメントの変数と引数を定義した方法でフォーマットします。（現在キャメルケースのみ対応）
-
-UnrealEngineの場合、[これ](https://forums.unrealengine.com/t/for-those-who-suffer-from-visual-studio-intellisense-slowness/49331)を設定したほうがいいかも
+現在ローカル変数に対応していません。
 
 ### オプション
 * フォーマット済みかどうかを判断するためのRegex
 * どんなときに、どういうフォーマットをするかをGUIで設定
+
+
+&nbsp;
+
+## Add Include
+クラス名を選択した状態で💡ボタンからそのクラスのIncludeを追加できます。
+基本フルパスですが、Unreal環境のみ整えています。
